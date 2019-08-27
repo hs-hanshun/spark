@@ -18,20 +18,17 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.11.12</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
             <version>2.1.1</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>2.7.2</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Logging -->
@@ -80,7 +77,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.atguigu.spark.WordCount</mainClass>
+                            <mainClass>cn.hassan.spark.Application</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
