@@ -1,7 +1,7 @@
 package cn.hassan.base.cutomer
 
-import cutomer.pojo.Customer
-import cutomer.service.CustomerService
+import cn.hassan.base.cutomer.pojo.Customer
+import cn.hassan.base.cutomer.service.CustomerService
 
 import scala.io.StdIn
 

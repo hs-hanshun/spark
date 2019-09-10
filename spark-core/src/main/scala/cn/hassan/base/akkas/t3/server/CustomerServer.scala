@@ -1,7 +1,7 @@
 package cn.hassan.base.akkas.t3.server
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
-import akkas.t3.common.{ClientMessage, ServerMessage}
+import cn.hassan.base.akkas.t3.common.{ClientMessage, ServerMessage}
 import com.typesafe.config.ConfigFactory
 
 class CustomerServer extends Actor{

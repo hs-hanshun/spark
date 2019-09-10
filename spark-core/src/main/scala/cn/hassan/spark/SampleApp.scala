@@ -8,8 +8,8 @@ object SampleApp extends App {
   val sparkContext = new SparkContext(sparkConf)
   Seq
   val value: RDD[Int] = sparkContext.parallelize(1 to 10)
-  val ints: Array[Int] = value.collect()
-  for (elem <- ints) {
+  val result: RDD[Int] = value.sample(true,0.4,2)
+  for (elem <- result.collect()) {
     println(elem)
   }
 }

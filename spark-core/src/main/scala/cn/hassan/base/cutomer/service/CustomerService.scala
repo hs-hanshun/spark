@@ -1,6 +1,6 @@
 package cn.hassan.base.cutomer.service
 
-import cutomer.pojo.Customer
+import cn.hassan.base.cutomer.pojo.Customer
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks.{break, breakable}

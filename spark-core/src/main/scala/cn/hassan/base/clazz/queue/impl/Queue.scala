@@ -1,6 +1,6 @@
 package cn.hassan.base.clazz.queue.impl
 
-import clazz.queue.Queue
+import cn.hassan.base.clazz.queue.Queue
 
 object Queue {
 

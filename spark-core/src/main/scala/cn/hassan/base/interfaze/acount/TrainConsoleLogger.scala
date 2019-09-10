@@ -1,6 +1,6 @@
 package cn.hassan.base.interfaze.acount
 
-import interfaze.Logger
+import cn.hassan.base.interfaze.Logger
 
 trait TrainConsoleLogger extends Logger {
 

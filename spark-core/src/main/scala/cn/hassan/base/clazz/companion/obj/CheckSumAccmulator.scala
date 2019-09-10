@@ -1,6 +1,6 @@
 package cn.hassan.base.clazz.companion.obj
 
-import clazz.companion.CheckSumAccmulator
+import cn.hassan.base.clazz.companion.CheckSumAccmulator
 
 /**
   * object 定义的是单例对象 相当java中的静态方法工具类
