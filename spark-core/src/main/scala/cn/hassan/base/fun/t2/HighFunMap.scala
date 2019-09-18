@@ -1,6 +1,6 @@
 package cn.hassan.base.fun.t2
 
-object HighOrderFunMap extends App {
+object HighFunMap extends App {
   val list = List(1,2,3,4)
   val listThree = list :+ 5
   val listTwo = listThree.map(multiple)

@@ -1,6 +1,6 @@
 package cn.hassan.base.fun.t2
 
-object HiggFunView {
+object HighFunView {
   def main(args: Array[String]): Unit = {
 
     val nums = (1 to 100).view.filter(eq)
