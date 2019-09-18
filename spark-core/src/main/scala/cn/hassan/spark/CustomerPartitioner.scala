@@ -14,8 +14,8 @@ class CustomerPartitioner(numParts:Int) extends Partitioner{
 
 object CustomerPartitioner{
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("partition")
-    val sc = new SparkContext(conf)
+    val sparkConf = new SparkConf().setAppName("partition").setMaster("local[*]")
+    val sc = new SparkContext(sparkConf)
     val data = sc.parallelize(List("aa.2","bb.2","cc.3","dd.3","ee.5"))
     data.map((_,1)).partitionBy(new CustomerPartitioner(5)).keys.saveAsTextFile("hdfs://hadoop101:9000/warehouse/spark")
   }
