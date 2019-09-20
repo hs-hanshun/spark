@@ -1,7 +1,7 @@
-package cn.hassan.spark
+package cn.hassan.spark.core
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 
 object SubtractApp extends App {
   val sparkConf = new SparkConf().setAppName("wordcount").setMaster("local[*]")

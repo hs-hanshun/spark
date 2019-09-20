@@ -1,4 +1,4 @@
-package cn.hassan.spark
+package cn.hassan.spark.core
 
 import org.apache.spark.rdd.JdbcRDD
 import org.apache.spark.{SparkConf, SparkContext}
