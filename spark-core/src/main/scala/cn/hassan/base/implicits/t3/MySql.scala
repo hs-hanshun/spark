@@ -1,4 +1,4 @@
-package cn.hassan.base.ict.t3
+package cn.hassan.base.implicits.t3
 
 class MySql {
   def sayHello():Unit={

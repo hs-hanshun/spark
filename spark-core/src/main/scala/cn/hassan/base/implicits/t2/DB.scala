@@ -1,4 +1,4 @@
-package cn.hassan.base.ict.t2
+package cn.hassan.base.implicits.t2
 
 class DB {
   def delete():Unit={
