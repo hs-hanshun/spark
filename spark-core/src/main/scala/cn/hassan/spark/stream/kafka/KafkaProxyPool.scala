@@ -1,4 +1,4 @@
-package cn.hassan.spark.stream
+package cn.hassan.spark.stream.kafka
 
 import java.util.Properties
 
