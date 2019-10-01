@@ -14,15 +14,15 @@ object StreamingKafka extends App {
 
   //Kafka参数配置
   val topic = "log"
-  val kafakParams = Map {
-    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> "47.99.217.209:9092"
-    ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer]
-    ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer]
-    ConsumerConfig.GROUP_ID_CONFIG -> "kafka"
+  val kafakParams = Map (
+    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> "47.99.217.209:9092",
+    ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer],
+    ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer],
+    ConsumerConfig.GROUP_ID_CONFIG -> "kafka",
     //smallest 从头开始消费  latest从最新的地方开始消费
-    ConsumerConfig.AUTO_OFFSET_RESET_CONFIG -> "latest"
+    ConsumerConfig.AUTO_OFFSET_RESET_CONFIG -> "latest",
     ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG -> (true: java.lang.Boolean)
-  }
+  )
 
   val lines = KafkaUtils.createDirectStream(
     ssc,
