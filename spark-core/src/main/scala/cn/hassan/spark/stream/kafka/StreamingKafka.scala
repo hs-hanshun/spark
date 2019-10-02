@@ -3,7 +3,7 @@ package cn.hassan.spark.stream.kafka
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
+import org.apache.spark.streaming.kafka010.{ConsumerStrategies, HasOffsetRanges, KafkaUtils, LocationStrategies}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 object StreamingKafka extends App {
@@ -40,6 +40,7 @@ object StreamingKafka extends App {
       pool.returnObject(kafkaProxy)
     })
     //更新offset
+    val offSetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
   })
 
   ssc.start()
