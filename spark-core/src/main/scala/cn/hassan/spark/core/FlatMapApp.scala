@@ -14,5 +14,13 @@ object FlatMapApp {
     println("------------------")
     println(result.collect())
     println("------------------")
+
+    val path = Thread.currentThread().getContextClassLoader.getResource("people.txt").getPath
+
+    val fileRdd = sc.textFile(path)
+
+    val fileResult = fileRdd.flatMap(_.split(","))
+
+    fileResult.collect().foreach(println(_))
   }
 }
