@@ -108,6 +108,12 @@
             <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
             <version>2.2.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-graphx -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-graphx_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
 
     </dependencies>
     <build>
