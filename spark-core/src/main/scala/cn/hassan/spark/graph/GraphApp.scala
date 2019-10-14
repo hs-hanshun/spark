@@ -14,6 +14,9 @@ object GraphApp extends App {
 
   val graphx = Graph(vertexRDD,edgeRDD)
 
+  //提取属性
+  //graphx.vertices.filter{case (id,(x,y)) => y == "prof"}
+
   val result = graphx.triplets.collect()
 
   for (item <- result){
