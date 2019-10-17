@@ -27,6 +27,9 @@ object KafkaApp {
 
     val consumer = new KafkaConsumer[String,String](props)
     consumer.subscribe(Collections.singletonList("kafka-test"))
+
+    //val partitionInfoes = consumer.partitionsFor("kafka-test")
+
     while (true) {
       val records = consumer.poll(100)
       for (record <- records){
