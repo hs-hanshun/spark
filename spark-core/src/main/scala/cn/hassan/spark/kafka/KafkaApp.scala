@@ -12,8 +12,9 @@ import scala.collection.JavaConversions._
 
 object KafkaApp {
   def main(args: Array[String]): Unit = {
-    producer()
+    //producer()
     //consumer()
+    offSetFun()
   }
 
   def consumer(): Unit ={
@@ -51,7 +52,7 @@ object KafkaApp {
     properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG,classOf[ProducerPrefixInterceptor].getName)//添加拦截器
     val producer = new KafkaProducer[String, String](properties)
     var num = 0
-    for(i<- 1 to 10){
+    for(i<- 1 to 5){
       producer.send(new ProducerRecord(topic,"topic"+i),new Callback(){
         override def onCompletion(metadata: RecordMetadata, exception: Exception): Unit = {
           if(exception != null){
@@ -71,9 +72,6 @@ object KafkaApp {
     props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("group.id", "kafka-test")
-    props.put("auto.offset.reset","earliest")
-    props.put("enable.auto.commit", "true")
-    props.put("auto.commit.interval.ms", "1000")
 
     val consumer = new KafkaConsumer[String,String](props)
 
