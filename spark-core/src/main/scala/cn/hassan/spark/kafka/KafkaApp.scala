@@ -2,6 +2,7 @@ package cn.hassan.spark.kafka
 
 import java.util.{Collections, Properties}
 
+import cn.hassan.spark.kafka.interceptor.ProducerPrefixInterceptor
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.clients.producer._
 import org.apache.kafka.common.serialization.StringSerializer
@@ -43,9 +44,10 @@ object KafkaApp {
     properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,brokers_list)
     properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName) //key的序列化;
     properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)//value的序列化;
+    properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG,classOf[ProducerPrefixInterceptor].getName)//添加拦截器
     val producer = new KafkaProducer[String, String](properties)
     var num = 0
-    for(i<- 1 to 10){
+    for(i<- 1 to 5){
       producer.send(new ProducerRecord(topic,"topic"+i),new Callback(){
         override def onCompletion(metadata: RecordMetadata, exception: Exception): Unit = {
           if(exception != null){
