@@ -1,13 +1,13 @@
-package cn.hassan.spark.core
-
+package cn.hassan.spark.kafka
 
 import java.util.{Collections, Properties}
 
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
+import org.apache.kafka.clients.producer._
 import org.apache.kafka.common.serialization.StringSerializer
 
 import scala.collection.JavaConversions._
+
 object KafkaApp {
   def main(args: Array[String]): Unit = {
     //producer()
