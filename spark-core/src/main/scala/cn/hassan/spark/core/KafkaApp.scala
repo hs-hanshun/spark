@@ -3,9 +3,8 @@ package cn.hassan.spark.core
 
 import java.util.{Collections, Properties}
 
-import com.google.gson.Gson
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
+import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
 import org.apache.kafka.common.serialization.StringSerializer
 
 import scala.collection.JavaConversions._
@@ -47,7 +46,15 @@ object KafkaApp {
     val producer = new KafkaProducer[String, String](properties)
     var num = 0
     for(i<- 1 to 10){
-      producer.send(new ProducerRecord(topic,"topic"+i))
+      producer.send(new ProducerRecord(topic,"topic"+i),new Callback(){
+        override def onCompletion(metadata: RecordMetadata, exception: Exception): Unit = {
+          if(exception != null){
+            exception.printStackTrace()
+          }else{
+            println(metadata.topic() + ":" + metadata.partition() + ":" + metadata.hasOffset)
+          }
+        }
+      })
     }
     producer.close()
   }
