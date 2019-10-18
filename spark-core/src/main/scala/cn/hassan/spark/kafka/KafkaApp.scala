@@ -26,8 +26,8 @@ object KafkaApp {
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("group.id", "kafka-test")
     props.put("auto.offset.reset","earliest")
-    props.put("enable.auto.commit", "true")
-    props.put("auto.commit.interval.ms", "1000")
+    props.put("enable.auto.commit", "true")//自动提交
+    props.put("auto.commit.interval.ms", "1000")//每隔一秒 自动提交一次
 
     val consumer = new KafkaConsumer[String,String](props)
     consumer.subscribe(Collections.singletonList("kafka-test"))
@@ -80,7 +80,7 @@ object KafkaApp {
     val partition = new TopicPartition("kafka-test",0)
     consumer.assign(Collections.singleton(partition))
 
-    val lastConsumerOffset = -1L
+    var lastConsumerOffset = -1L
 
     breakable {
       while (true){
@@ -96,7 +96,7 @@ object KafkaApp {
           println(record.offset() +"--" +record.key() +"--" +record.value())
         }
 
-        partitionRecords.get(partitionRecords.size() -1).offset()
+        lastConsumerOffset = partitionRecords.get(partitionRecords.size() -1).offset()
 
         consumer.commitAsync()
       }
