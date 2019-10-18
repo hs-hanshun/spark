@@ -6,7 +6,7 @@ import cn.hassan.spark.kafka.interceptor.ProducerPrefixInterceptor
 import org.apache.kafka.clients.consumer.{ConsumerConfig, KafkaConsumer}
 import org.apache.kafka.clients.producer._
 import org.apache.kafka.common.TopicPartition
-import org.apache.kafka.common.serialization.StringSerializer
+import org.apache.kafka.common.serialization.{StringDeserializer, StringSerializer}
 
 import scala.collection.JavaConversions._
 import scala.util.control.Breaks._
@@ -18,6 +18,9 @@ object KafkaApp {
     offSetFun()
   }
 
+  /**
+    * kafka 消费者
+    */
   def consumer(): Unit ={
     val props = new Properties()
     props.put("bootstrap.servers","47.99.217.209:9092")
@@ -42,6 +45,9 @@ object KafkaApp {
     consumer.close()
   }
 
+  /**
+    * kafka生产者
+    */
   def producer(): Unit ={
     val brokers_list = "47.99.217.209:9092"
     val topic = "kafka-test"
@@ -67,6 +73,9 @@ object KafkaApp {
     producer.close()
   }
 
+  /**
+    * kafka offset 测试类
+    */
   def offSetFun(): Unit ={
     val props = new Properties()
     props.put("bootstrap.servers","47.99.217.209:9092")
@@ -107,5 +116,30 @@ object KafkaApp {
     println("commint offset is " + metadata.offset())
     val position = consumer.position(partition)
     println("the offset of next record is " + position)
+  }
+
+  /**
+    * kafka seek函数
+    */
+  def seekFun(): Unit ={
+    val props = new Properties()
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"47.99.217.209:9092")
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,classOf[StringDeserializer])
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,classOf[StringDeserializer])
+
+    val consumer = new KafkaConsumer[String,String](props)
+    consumer.subscribe(Collections.singletonList("kafka-test"))
+    consumer.poll(1000)
+    val assignment = consumer.assignment()
+
+    for (partitin <- assignment){
+      consumer.seek(partitin,10)
+    }
+
+    while (true) {
+      val records = consumer.poll(1000)
+    }
+
+
   }
 }
