@@ -10,6 +10,8 @@ import org.apache.kafka.common.serialization.StringSerializer
 
 import scala.collection.JavaConversions._
 
+import scala.util.control.Breaks._
+
 object KafkaApp {
   def main(args: Array[String]): Unit = {
     //producer()
@@ -79,16 +81,25 @@ object KafkaApp {
     consumer.assign(Collections.singleton(partition))
 
     val lastConsumerOffset = -1L
-    while (true){
-      val records = consumer.poll(1000)
-      if (records.isEmpty){
-        return
+
+    breakable {
+      while (true){
+        val records = consumer.poll(1000)
+        if (records.isEmpty){
+          println("topic is null")
+          break()
+        }
+
+        val partitionRecords = records.records(partition)
+
+        for (record <- partitionRecords) {
+          println(record.offset() +"--" +record.key() +"--" +record.value())
+        }
+
+        partitionRecords.get(partitionRecords.size() -1).offset()
+
+        consumer.commitAsync()
       }
-      val partitionRecords = records.records(partition)
-
-      partitionRecords.get(partitionRecords.size() -1).offset()
-
-      consumer.commitAsync()
     }
 
     println("comsumed offset id " + lastConsumerOffset)
