@@ -3,13 +3,12 @@ package cn.hassan.spark.kafka
 import java.util.{Collections, Properties}
 
 import cn.hassan.spark.kafka.interceptor.ProducerPrefixInterceptor
-import org.apache.kafka.clients.consumer.KafkaConsumer
+import org.apache.kafka.clients.consumer.{ConsumerConfig, KafkaConsumer}
 import org.apache.kafka.clients.producer._
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.StringSerializer
 
 import scala.collection.JavaConversions._
-
 import scala.util.control.Breaks._
 
 object KafkaApp {
@@ -74,6 +73,7 @@ object KafkaApp {
     props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("group.id", "kafka-test")
+    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false)
 
     val consumer = new KafkaConsumer[String,String](props)
 
