@@ -82,7 +82,7 @@ object KafkaApp {
     props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("group.id", "kafka-test")
-    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false)
+    //props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false)
 
     val consumer = new KafkaConsumer[String,String](props)
 
